@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import './App.css'
 
-function App() {
+const Home = React.lazy(() => import("./pages/Home"));
+const ScrollAnimation = React.lazy(() => import("./pages/scroll-animation"));
+const CarouselAnimation = React.lazy(() => import("./pages/carousel-animation"));
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense>
+    {/* <Suspense fallback={<Loader />}> */}
+      <BrowserRouter>
+      <Routing/>
+      </BrowserRouter>
+    </Suspense>
   );
 }
+const Routing =() => {
 
-export default App;
+  const location = useLocation();
+  return <Routes location={location} key={location.pathname}>
+  <Route path="/" element={<Home />} />
+  <Route path="/scroll-animation" element={<ScrollAnimation />} />
+  <Route path="/carousel-animation" element={<CarouselAnimation />} />
+  <Route path="*" element={<Navigate to="/" />} />
+</Routes>
+}
