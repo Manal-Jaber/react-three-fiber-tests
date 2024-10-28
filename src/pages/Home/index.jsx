@@ -6,6 +6,7 @@ const Home  = () => {
        <h1>Trying out React Three Fiber scroll animations</h1>
         <p><Link to={'/scroll-animation'}>Scroll Animation</Link></p>
         <p><Link to={'/carousel-animation'}>Carousel Animation</Link></p>
+        <p><Link to={'/horizontal-vertical-carousel'}>Horizontal Vertical Carousel</Link></p>
     </div>
 }
 export default Home
